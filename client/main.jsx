@@ -1,4 +1,5 @@
 import React from 'react';
+import { combineReducers, createStore } from 'redux';
 
 export const TodoApp = ({ content }) => (
   <div>
@@ -7,6 +8,99 @@ export const TodoApp = ({ content }) => (
   </div>
 );
 
-export const Todos = () => (
-  <div></div>
-);
+// Todo Reducer
+const todo = ( state, action ) => {
+  switch ( action.type ) {
+    case 'ADD_TODO':
+      return {
+        id:         action.idea,
+        text:       action.text,
+        completed:  false
+      };
+    case 'TOGGLE_TODO':
+      if ( state.id !== action.id ) {
+        return state;
+      }
+
+      return {
+        ...state,
+        completed: !state.completed
+      };
+    default:
+      return state;
+  }
+}
+
+// Todos Reducer
+const todos = ( state = [], action ) => {
+  switch ( action.type ) {
+    case 'ADD_TODO':
+      return [
+        ...state,
+        todo( undefined, action )  // undefined - the todo doesn't yet
+      ];
+    case 'TOGGLE_TODO':
+      return state.map( t => todo( t, action ) );
+    default:
+      return state;
+  }
+};
+
+// Visibilily Reducer
+const visibilityFilter = ( state = 'SHOW_ALL', action ) => {
+  switch ( action.type ) {
+    case 'SET_VISIBILITY_FILTER':
+      return action.filter;
+    default:
+      return state;
+  }
+};
+
+// Create todoApp Reducer
+const todoApp = combineReducers({
+  todos,
+  visibilityFilter
+});
+
+// Create Store
+const store = createStore(todoApp);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//

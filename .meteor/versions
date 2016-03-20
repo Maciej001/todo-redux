@@ -5,7 +5,6 @@ babel-runtime@0.1.5-beta.11
 base64@1.0.5-beta.11
 binary-heap@1.0.5-beta.11
 blaze@2.1.4-beta.11
-blaze-html-templates@1.0.1
 blaze-tools@1.0.5-beta.11
 boilerplate-generator@1.0.5-beta.11
 caching-compiler@1.0.1-beta.11
@@ -64,7 +63,7 @@ spacebars@1.0.8-beta.11
 spacebars-compiler@1.0.8-beta.11
 standard-minifier-css@1.0.3-beta.11
 standard-minifier-js@1.0.3-beta.11
-templating@1.1.6-beta.11
+static-html@1.0.4-beta.11
 templating-tools@1.0.1-beta.11
 tracker@1.0.10-beta.11
 ui@1.0.8
