@@ -12,6 +12,7 @@ export const TodoApp = ({ content }) => (
 const todo = ( state, action ) => {
   switch ( action.type ) {
     case 'ADD_TODO':
+
       return {
         id:         action.idea,
         text:       action.text,
@@ -37,7 +38,7 @@ const todos = ( state = [], action ) => {
     case 'ADD_TODO':
       return [
         ...state,
-        todo( undefined, action )  // undefined - the todo doesn't yet
+        todo( undefined, action )  // undefined - the todo doesn't yet exist
       ];
     case 'TOGGLE_TODO':
       return state.map( t => todo( t, action ) );
@@ -63,7 +64,7 @@ const todoApp = combineReducers({
 });
 
 // Create Store
-const store = createStore(todoApp);
+export const store = createStore(todoApp);
 
 
 

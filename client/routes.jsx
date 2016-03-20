@@ -1,12 +1,13 @@
-import React          from 'react';
-import { mount }      from 'react-mounter';
-import { TodoApp }    from './main.jsx';
-import TodosList      from './TodosList.jsx';
+import React                from 'react';
+import { mount }            from 'react-mounter';
+import { TodoApp, store }   from './main.jsx';
+import TodosContainer       from './TodosContainer.js';
+
 
 FlowRouter.route("/", {
   action() {
     mount(TodoApp, {
-        content: <TodosList />
+        content: () => <TodosListContainer />
     });
   }
 });
