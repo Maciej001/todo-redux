@@ -14,7 +14,7 @@ const todo = ( state, action ) => {
     case 'ADD_TODO':
 
       return {
-        id:         action.idea,
+        id:         action.id,
         text:       action.text,
         completed:  false
       };

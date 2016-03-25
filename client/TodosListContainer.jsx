@@ -1,15 +1,14 @@
-// import { Meteor } from 'meteor/meteor';
-import React from 'react';
+import React                  from 'react';
 import { composeWithTracker } from 'react-komposer';
-import TodosList from './TodosList.jsx';
+import TodosList              from './TodosList.jsx';
+import { store }              from './main.jsx';
 
 function composer( props, onData ) {
-  const todosSub = Meteor.subscribe('todos.list');
-
-  if ( todosSub.ready() ) {
-    const todos = Todos.find();
-    onData(null, { todos });
-  };
+    onData( null, { todos: store.getState().todos });
+    return store.subscribe(() => {
+      const { todos } = store.getState();
+      onData( null, { todos } )
+    })
 };
 
-export default composeWithTracker(composer)(TodosList);
+export default composeWithTracker( composer )( TodosList );

@@ -1,16 +1,25 @@
 import React from       'react';
 import { store } from   './main.jsx';
 
-const TodosList = ({ todos }) => (
 
+const TodosList = ({ todos , addTodo }) => (
       <div>
         <h1>Todos List</h1>
-        <button onClick={() => {
-            store.dispatch({
-              type:   'ADD_TODO',
-              text:   'Test'
-            })
-          }}>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          store.dispatch({
+            type: 'ADD_TODO',
+            text: this.newTodo.value
+          });
+          this.newTodo.value = '';
+        }}>
+          <input
+            ref={ node => {
+              this.newTodo = node;
+            }}
+          />
+        </form>
+        <button >
           Add Todo
         </button>
         <ul>
