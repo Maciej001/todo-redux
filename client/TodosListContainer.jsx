@@ -4,11 +4,11 @@ import TodosList              from './TodosList.jsx';
 import { store }              from './main.jsx';
 
 function composer( props, onData ) {
-    onData( null, { todos: store.getState().todos });
+    onData( null, { ...store.getState() });
+
     return store.subscribe(() => {
-      const { todos } = store.getState();
-      onData( null, { todos } )
-    })
+      onData( null, { ...store.getState() } ) // spreads the store into todos and visibilityFilter
+    });
 };
 
 export default composeWithTracker( composer )( TodosList );
