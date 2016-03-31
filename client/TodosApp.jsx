@@ -1,9 +1,10 @@
 import React from       'react';
 import { store } from   './main.jsx';
-import FilterLink from  './FilterLink.jsx';
-import TodoItem from    './TodoItem.jsx';
 
-let newTodoId = 0;
+import TodosList  from  './TodosList.jsx';
+import TodoItem from    './TodoItem.jsx';
+import AddTodo from     './AddTodo.jsx';
+import Footer from      './Footer.jsx';
 
 const getVisibleTodos = ( todos, filter ) => {
   console.log(todos, filter);
@@ -17,64 +18,42 @@ const getVisibleTodos = ( todos, filter ) => {
   }
 };
 
+let newTodoId = 0;
+
 class TodosApp extends React.Component {
   render() {
     const { todos, visibilityFilter, onTodoClick } = this.props;
-    const visibleTodos = getVisibleTodos( todos, visibilityFilter );
 
     return (
       <div>
         <h1>Todos List</h1>
-        <form onSubmit={(e) => {
-          e.preventDefault();
+
+        <AddTodo onAddTodo={ text =>
+            store.dispatch({
+              type: 'ADD_TODO',
+              text,
+              id: newTodoId++
+            })
+          }
+        />
+
+        <TodosList
+          todos={ getVisibleTodos( todos, visibilityFilter ) }
+          onTodoClick={ id => store.dispatch({ type: 'TOGGLE_TODO', id }) }
+        />
+
+      <Footer
+        visibililtyFilter={ visibilityFilter }
+        onFilterClick={ filter =>
           store.dispatch({
-            type: 'ADD_TODO',
-            text: this.newTodo.value,
-            id: newTodoId++
-          });
-          this.newTodo.value = '';
-        }}>
-          <input
-            ref={ node => {
-              this.newTodo = node;
-            }}
-          />
-        </form>
+            type: 'SET_VISIBILITY_FILTER',
+            filter
+          })
+        }
+      />
 
-        <ul>
-          { visibleTodos.map( todo =>
-            <TodoItem
-              key={ todo.id }
-              { ...todo }
-              onTodoClick={ () => onTodoClick( todo.id ) }
-            />
-          )}
-        </ul>
 
-        <p>
-          Show:
-          {' | '}
-          <FilterLink
-            filter='SHOW_ALL'
-            currentFilter={ visibilityFilter }
-          >
-            All
-          </FilterLink>{' | '}
 
-          <FilterLink
-            filter='SHOW_COMPLETED'
-            currentFilter={ visibilityFilter }
-          >
-            Completed
-          </FilterLink>{' | '}
-
-          <FilterLink
-            filter='SHOW_ACTIVE'
-            currentFilter={ visibilityFilter }
-          >
-            Active
-          </FilterLink>
-        </p>
       </div>
     )
   }
