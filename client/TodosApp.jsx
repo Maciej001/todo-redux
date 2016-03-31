@@ -42,17 +42,7 @@ class TodosApp extends React.Component {
           onTodoClick={ id => store.dispatch({ type: 'TOGGLE_TODO', id }) }
         />
 
-      <Footer
-        visibililtyFilter={ visibilityFilter }
-        onFilterClick={ filter =>
-          store.dispatch({
-            type: 'SET_VISIBILITY_FILTER',
-            filter
-          })
-        }
-      />
-
-
+      <Footer/>
 
       </div>
     )
