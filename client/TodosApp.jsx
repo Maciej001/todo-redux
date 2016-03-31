@@ -1,6 +1,7 @@
 import React from       'react';
 import { store } from   './main.jsx';
 import FilterLink from  './FilterLink.jsx';
+import TodoItem from    './TodoItem.jsx';
 
 let newTodoId = 0;
 
@@ -16,9 +17,11 @@ const getVisibleTodos = ( todos, filter ) => {
   }
 };
 
-class TodosList extends React.Component {
+class TodosApp extends React.Component {
   render() {
-    const visibleTodos = getVisibleTodos( this.props.todos, this.props.visibilityFilter );
+    const { todos, visibilityFilter, onTodoClick } = this.props;
+    const visibleTodos = getVisibleTodos( todos, visibilityFilter );
+
     return (
       <div>
         <h1>Todos List</h1>
@@ -40,34 +43,41 @@ class TodosList extends React.Component {
 
         <ul>
           { visibleTodos.map( todo =>
-            <li key={ todo.id }
-              onClick={() => {
-                store.dispatch({
-                  type:   'TOGGLE_TODO',
-                  id:     todo.id
-                });
-              }}
-
-              style={{
-                textDecoration: todo.completed ?
-                  'line-through' : 'none'
-              }}>
-
-              { todo.text }
-            </li>
+            <TodoItem
+              key={ todo.id }
+              { ...todo }
+              onTodoClick={ () => onTodoClick( todo.id ) }
+            />
           )}
         </ul>
 
         <p>
           Show:
           {' | '}
-          <FilterLink filter='SHOW_ALL'>All</FilterLink>{' | '}
-          <FilterLink filter='SHOW_COMPLETED'>Completed</FilterLink>{' | '}
-          <FilterLink filter='SHOW_ACTIVE'>Active</FilterLink>
+          <FilterLink
+            filter='SHOW_ALL'
+            currentFilter={ visibilityFilter }
+          >
+            All
+          </FilterLink>{' | '}
+
+          <FilterLink
+            filter='SHOW_COMPLETED'
+            currentFilter={ visibilityFilter }
+          >
+            Completed
+          </FilterLink>{' | '}
+
+          <FilterLink
+            filter='SHOW_ACTIVE'
+            currentFilter={ visibilityFilter }
+          >
+            Active
+          </FilterLink>
         </p>
       </div>
     )
   }
 };
 
-export default TodosList;
+export default TodosApp;
