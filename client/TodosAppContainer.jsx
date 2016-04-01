@@ -1,6 +1,6 @@
 import React                  from 'react';
 import { composeWithTracker } from 'react-komposer';
-import TodosApp               from './TodosApp.jsx';
+import { TodosApp }              from './TodosApp.jsx';
 import { store }              from './main.jsx';
 
 function composer( props, onData ) {

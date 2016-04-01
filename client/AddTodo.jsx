@@ -1,6 +1,8 @@
 import React from       'react';
 import { store } from   './main.jsx';
 
+let newTodoId = 0;
+
 class AddTodo extends React.Component {
   render() {
     const { onAddTodo } = this.props;
@@ -9,7 +11,11 @@ class AddTodo extends React.Component {
     return (
       <form onSubmit={(e) => {
         e.preventDefault();
-        onAddTodo(input.value);
+        store.dispatch({
+          type: 'ADD_TODO',
+          text: input.value,
+          id: newTodoId++
+        })
         input.value = '';
       }}>
         <input
