@@ -1,5 +1,5 @@
-import React from 'react';
-import { store } from './main.jsx';
+import React from       'react';
+import { store } from   './reducers.jsx';
 
 class Link extends React.Component {
   render() {

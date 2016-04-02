@@ -1,5 +1,5 @@
 import React from       'react';
-import { store } from   './main.jsx';
+import { store } from   './reducers.jsx';
 import FilterLink from  './FilterLink.jsx';
 
 class Footer extends React.Component {

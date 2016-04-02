@@ -1,5 +1,5 @@
 import React from       'react';
-import { store } from   './main.jsx';
+import { store } from   './reducers.jsx';
 import TodoItem from    './TodoItem.jsx';
 
 class TodosList extends React.Component {

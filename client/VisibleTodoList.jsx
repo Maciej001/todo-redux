@@ -1,5 +1,5 @@
 import React from       'react';
-import { store } from   './main.jsx';
+import { store } from   './reducers.jsx';
 import TodosList from   './TodosList.jsx';
 
 const getVisibleTodos = ( todos, filter ) => {
@@ -15,16 +15,6 @@ const getVisibleTodos = ( todos, filter ) => {
 };
 
 class VisibleTodoList extends React.Component {
-
-  componentDidMount() {
-    this.unsubscribe = store.subscribe( () => {
-      this.forceUpdate();
-    });
-  }
-
-  componentWillUnmount() {
-    this.unsubscribe();
-  }
 
   render() {
     const { props } = this.props;

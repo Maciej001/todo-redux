@@ -1,5 +1,5 @@
 import React from       'react';
-import { store } from   './main.jsx';
+import { store } from   './reducers.jsx';
 
 let newTodoId = 0;
 
@@ -9,7 +9,7 @@ class AddTodo extends React.Component {
     let input;
 
     return (
-      <form onSubmit={(e) => {
+      <form onSubmit={ (e) => {
         e.preventDefault();
         store.dispatch({
           type: 'ADD_TODO',
@@ -19,9 +19,7 @@ class AddTodo extends React.Component {
         input.value = '';
       }}>
         <input
-          ref={ node => {
-            input = node;
-          }}
+          ref={ node => { input = node }}
         />
       </form>
     );
