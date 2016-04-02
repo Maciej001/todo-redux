@@ -4,12 +4,7 @@ import { TodosApp }              from './TodosApp.jsx';
 import { store }              from './main.jsx';
 
 function composer( props, onData ) {
-    onData(
-      null,
-      {
-        ...store.getState(),
-      }
-    );
+    onData( null, { ...store.getState() } );
 
     return store.subscribe(() => {
       onData( null, { ...store.getState() } ) // spreads the store into todos and visibilityFilter
